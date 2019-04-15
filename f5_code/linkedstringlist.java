@@ -2,7 +2,7 @@ class LinkedStringList  {
     // Single linked list
     private StringNode head;
 
-    public void LinkedStringList() {
+    public LinkedStringList() {
 	head = null;
     }
 

@@ -2,7 +2,7 @@ class LinkedList<E>  {
     // Single linked list
     private Node<E> head;
 
-    public void LinkedList() {
+    public LinkedList() {
 	head = null;
     }
 
