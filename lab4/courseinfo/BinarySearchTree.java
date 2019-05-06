@@ -64,9 +64,25 @@ public class BinarySearchTree {
 	/**
 	 * find: Find a course given a course code
 	 */
-	public BSTNode find(String courseCode) {
-	    return null; // Dummy return value. Should be replaced with a proper algorithm.
-	}
+	public BSTNode find(String courseCode) throws NoSuchElementException {
+        BSTNode node = find(root, courseCode);
+        if (node==null) {
+            throw new NoSuchElementException("Given key not in BST!");
+        }
+        return node;
+    }
+    private BSTNode find(BSTNode root, String courseCode) {
+        if (root==null) {
+            return null;
+        }
+        if (courseCode.compareTo(root.getCourseCode()) < 0) {
+            return find(root.getLeftChild(), courseCode);
+        }
+        if (courseCode.compareTo(root.getCourseCode()) > 0) {
+            return find(root.getRightChild(), courseCode);
+        }
+        return root;
+    }
 
 
 	/**
