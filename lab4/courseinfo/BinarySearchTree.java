@@ -52,8 +52,14 @@ public class BinarySearchTree {
 	 */
 
 	public int size() {
-	    return 0; // Dummy return value, to make it compile. Should be replace with proper algorithm.
-	}
+        return size(root);
+    }
+    private int size(BSTNode root) {
+        if (root==null) {
+            return 0;
+        }
+        return 1 + size(root.getLeftChild()) + size(root.getRightChild());
+    }
 
 	/**
 	 * find: Find a course given a course code
