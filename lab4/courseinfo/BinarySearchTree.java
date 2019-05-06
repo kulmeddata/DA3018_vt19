@@ -84,6 +84,57 @@ public class BinarySearchTree {
         return root;
     }
 
+	/**
+     * Public interface for removing data from the data-structure. Utilizes
+     * a private, more technical method.
+     * @param courseCode, eg "DA3018"
+     */
+    public void remove(String courseCode) throws NoSuchElementException {
+        BSTNode node = find(courseCode);
+        root = remove(root, node);
+    }
+    /**
+     * Remove 'node' from the tree pointed at by 'root'.
+     * @return The node that should be the root of this subtree.
+     * @param root
+     * @param node
+     */
+    private BSTNode remove(BSTNode root, BSTNode node) {
+        if (root==null) { // then nothing to remove
+            return null;
+        }
+        // recursive step, key not yet found
+        if (node.getCourseCode().compareTo(root.getCourseCode()) < 0) { // then recur left
+            root.setChildren(remove(root.getLeftChild(), node), root.getRightChild());
+            return root;
+        }
+        if (node.getCourseCode().compareTo(root.getCourseCode()) > 0 ) { // then recur right
+            root.setChildren(root.getLeftChild(), remove(root.getRightChild(), node));
+            return root;
+        }
+        // base case, node.getCourseCode().equals(root.getCourseCode())
+        // if root has at most one child, then splice out root
+        if (root.getLeftChild()==null) {
+            return root.getRightChild();
+        }
+        if (node.getRightChild()==null) {
+            return root.getLeftChild();
+        }
+        // root has two children, so in particular a right subtree
+        BSTNode successor = min(root.getRightChild()); // in-order-successor of root
+        BSTNode newRoot = new BSTNode(successor.getCourseCode(), successor.getCourseName(), successor.getCredits());
+        newRoot.setChildren(root.getLeftChild(), remove(root.getRightChild(), successor));
+        return newRoot;
+    }
+    private BSTNode min(BSTNode root) {
+        if (root==null) {
+            return null;
+        }
+        if (root.getLeftChild()==null) {
+            return root;
+        }
+        return min(root.getLeftChild());
+    }
 
 	/**
 	 * Nodes in the search tree
