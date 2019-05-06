@@ -28,8 +28,6 @@ public class BinarySearchTree {
 	 * @returns The node that should be the root of this subtree.
 	 * @param root
 	 * @param node
-	 *
-	 * WARNING! This method has a bug, it does not behave according to specification!
 	 */
 	private BSTNode insert(BSTNode root, BSTNode node) {
 		if (root==null) {
@@ -41,7 +39,7 @@ public class BinarySearchTree {
 			if (node.getCourseCode().compareTo(currentKey) < 0) { // left string "before" right string
 				left = insert(left, node);
 			} else if (node.getCourseCode().compareTo(currentKey) > 0) { // left string "after" right string
-				right = insert(left, node);
+				right = insert(right, node);
 			}
 
 			root.setChildren(left, right);
