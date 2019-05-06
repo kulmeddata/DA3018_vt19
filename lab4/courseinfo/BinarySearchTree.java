@@ -1,5 +1,7 @@
 package courseinfo;
 
+import java.util.NoSuchElementException;
+
 /**
  * Store course information in a binary search tree
  *
@@ -40,7 +42,10 @@ public class BinarySearchTree {
 				left = insert(left, node);
 			} else if (node.getCourseCode().compareTo(currentKey) > 0) { // left string "after" right string
 				right = insert(right, node);
-			}
+			} else { // if key already in tree, overwrite corresponding data
+                node.setChildren(root.getLeftChild(), root.getRightChild());
+                return node;
+            }
 
 			root.setChildren(left, right);
 			return root;
