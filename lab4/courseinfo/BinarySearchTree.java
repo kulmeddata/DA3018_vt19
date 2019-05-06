@@ -139,6 +139,20 @@ public class BinarySearchTree {
             return root;
         }
         return min(root.getLeftChild());
+	}
+	/**
+     * Print the data of each node using in-order-traversal of BST.
+     */
+    public void inOrderPrint() {
+        inOrderPrint(root);
+    }
+    private void inOrderPrint(BSTNode root) {
+        if (root==null) {
+            return;
+        }
+        inOrderPrint(root.getLeftChild());
+        System.out.println(root.getCourseCode()+" "+root.getCourseName()+" "+root.getCredits());
+        inOrderPrint(root.getRightChild());
     }
 
 	/**
